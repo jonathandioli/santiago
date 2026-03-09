@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cozumel Excursions with Santiago</title>
+  <meta name="description" content="Private, fully customized tours in Cozumel, Mexico with your local guide Santiago. Snorkeling, diving, cenotes, fishing, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ocean:    #041C2C;
+      --deep:     #062438;
+      --teal:     #00A8B5;
+      --teal-lt:  #00C9D8;
+      --coral:    #E06B45;
+      --sand:     #F4E8D8;
+      --sand-dk:  #E8D5BC;
+      --white:    #FAFAF8;
+      --text:     #1A1A1A;
+      --muted:    #6B7280;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE TEXTURE OVERLAY ────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ─── NAV ──────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.4s, backdrop-filter 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(4, 28, 44, 0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--teal-lt); }
+
+    .nav-wa {
+      background: #25D366;
+      color: white !important;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.75rem !important;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+
+    .nav-wa:hover {
+      color: white !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+    }
+
+    /* ─── LANGUAGE TOGGLE ──────────────────────────── */
+    .lang-toggle {
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 2rem;
+      padding: 0.3rem 0.75rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      line-height: 1;
+    }
+
+    .lang-toggle:hover {
+      color: var(--teal-lt);
+      border-color: var(--teal-lt);
+      background: rgba(0,201,216,0.06);
+    }
+
+    /* ─── HERO ─────────────────────────────────────── */
+    #hero {
+      min-height: 100svh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: #041C2C;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(4,28,44,0.55) 0%,
+        rgba(4,28,44,0.35) 50%,
+        rgba(4,28,44,0.60) 100%
+      );
+      z-index: 1;
+    }
+
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(0,201,216,0.25);
+      animation: ripple-expand 8s ease-out infinite;
+      z-index: 2;
+    }
+
+    .ripple:nth-child(3) { width: 300px; height: 300px; bottom: 10%; right: 15%; animation-delay: 0s; }
+    .ripple:nth-child(4) { width: 500px; height: 500px; bottom: 5%;  right: 10%; animation-delay: 2s; }
+    .ripple:nth-child(5) { width: 700px; height: 700px; bottom: 0%;  right: 5%;  animation-delay: 4s; }
+
+    @keyframes ripple-expand {
+      0%   { transform: scale(0.8); opacity: 0.7; }
+      100% { transform: scale(1.3); opacity: 0; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 8rem 2rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal-lt);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.2s;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 9vw, 7.5rem);
+      font-weight: 300;
+      line-height: 0.95;
+      color: var(--white);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fade-up 0.9s ease forwards 0.4s;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--teal-lt);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: rgba(255,255,255,0.65);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      font-weight: 300;
+      opacity: 0;
+      animation: fade-up 0.9s ease forwards 0.6s;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fade-up 0.9s ease forwards 0.8s;
+    }
+
+    .btn-primary {
+      background: var(--coral);
+      color: white;
+      padding: 1rem 2.2rem;
+      border: none;
+      border-radius: 0.2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: #c95a37;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(224,107,69,0.4);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--white);
+      padding: 1rem 2.2rem;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 0.2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--teal-lt);
+      color: var(--teal-lt);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fade-up 1s ease forwards 1.2s;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, rgba(0,168,181,0.8), transparent);
+      animation: scroll-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scroll-pulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50%       { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* ─── WAVE DIVIDERS ────────────────────────────── */
+    .wave-divider { display: block; width: 100%; overflow: hidden; line-height: 0; }
+    .wave-divider svg { display: block; width: 100%; }
+
+    /* ─── SECTION SHARED ───────────────────────────── */
+    section { position: relative; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+    .section-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--ocean);
+    }
+
+    .section-title.light { color: var(--white); }
+
+    .divider-line { width: 48px; height: 2px; background: var(--coral); margin: 1.5rem 0; }
+
+    /* ─── TOURS ────────────────────────────────────── */
+    #tours { background: var(--sand); padding: 6rem 0; }
+
+    .tours-header { text-align: center; margin-bottom: 4rem; }
+    .tours-header .divider-line { margin: 1.5rem auto; }
+
+    .tours-sub { color: var(--muted); max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+    .tours-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tour-card {
+      background: var(--white);
+      border-radius: 0.4rem;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+
+    .tour-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(4,28,44,0.12);
+    }
+
+    .tour-card-img {
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tour-card-img .icon-bg { font-size: 4rem; opacity: 0.9; transition: transform 0.4s; }
+    .tour-card:hover .icon-bg { transform: scale(1.15); }
+
+    .tour-card-img.snorkel { background: linear-gradient(135deg, #0A3A4A, #00A8B5); }
+    .tour-card-img.cenotes { background: linear-gradient(135deg, #1A4A35, #2D8A6A); }
+    .tour-card-img.island  { background: linear-gradient(135deg, #4A2A1A, #C67B3A); }
+    .tour-card-img.fishing { background: linear-gradient(135deg, #1A2A4A, #3A6AA8); }
+    .tour-card-img.custom  { background: linear-gradient(135deg, #3A1A4A, #8A4AC6); }
+
+    .tour-badge {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.6rem;
+      border-radius: 1rem;
+      backdrop-filter: blur(4px);
+    }
+
+    .tour-card-body { padding: 1.5rem; }
+
+    .tour-card-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--ocean);
+      margin-bottom: 0.5rem;
+    }
+
+    .tour-card-body p { color: var(--muted); font-size: 0.875rem; line-height: 1.65; margin-bottom: 1rem; }
+
+    .tour-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--sand);
+      color: var(--ocean);
+      padding: 0.25rem 0.6rem;
+      border-radius: 0.2rem;
+    }
+
+    /* ─── ABOUT ────────────────────────────────────── */
+    #about { background: var(--ocean); padding: 6rem 0; }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+
+    .about-img-frame { position: relative; }
+
+    .about-img-placeholder {
+      aspect-ratio: 3/4;
+      background: linear-gradient(160deg, #062438, #0A3A4A);
+      border-radius: 0.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: rgba(255,255,255,0.25);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid rgba(0,168,181,0.15);
+    }
+
+    .about-img-placeholder span { font-size: 3rem; }
+
+    .about-accent {
+      position: absolute;
+      bottom: -1.5rem; right: -1.5rem;
+      width: 60%; aspect-ratio: 1;
+      border: 1px solid rgba(0,168,181,0.25);
+      border-radius: 0.4rem;
+      z-index: -1;
+    }
+
+    .about-content .section-tag { color: var(--teal-lt); }
+    .about-content .section-title { color: var(--white); }
+
+    .about-body { color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 2rem; font-size: 0.95rem; }
+    .about-body + .about-body { margin-top: 1rem; }
+
+    .stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--teal-lt); line-height: 1; }
+    .stat-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 0.3rem; }
+
+    /* ─── WHY US ───────────────────────────────────── */
+    #why { background: var(--white); padding: 6rem 0; }
+
+    .why-header { text-align: center; margin-bottom: 4rem; }
+    .why-header .divider-line { margin: 1.5rem auto; }
+
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+
+    .why-card {
+      padding: 2.5rem;
+      border: 1px solid var(--sand-dk);
+      border-radius: 0.4rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .why-card:hover { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,168,181,0.06); }
+
+    .why-icon { font-size: 2rem; margin-bottom: 1.25rem; }
+
+    .why-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--ocean); margin-bottom: 0.75rem; }
+    .why-card p { color: var(--muted); font-size: 0.875rem; line-height: 1.7; }
+
+    /* ─── GALLERY ──────────────────────────────────── */
+    #gallery { background: var(--sand); padding: 6rem 0; }
+
+    .gallery-header { text-align: center; margin-bottom: 3rem; }
+    .gallery-header .divider-line { margin: 1.5rem auto; }
+
+    .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: auto auto; gap: 0.75rem; }
+
+    .gallery-cell {
+      background: linear-gradient(135deg, #062438, #0A3A4A);
+      border-radius: 0.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.2);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-cell:first-child { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+    .gallery-cell span { font-size: 2rem; margin-bottom: 0.5rem; }
+    .gallery-cell-inner { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+
+    .gallery-note { text-align: center; margin-top: 2rem; color: var(--muted); font-size: 0.8rem; font-style: italic; }
+
+    /* ─── BOOKING ──────────────────────────────────── */
+    #book { background: var(--ocean); padding: 6rem 0; }
+
+    .book-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
+
+    .book-info .section-tag { color: var(--teal-lt); }
+    .book-info .section-title { color: var(--white); }
+
+    .book-info p { color: rgba(255,255,255,0.55); line-height: 1.75; margin-top: 1.5rem; font-size: 0.9rem; }
+
+    .book-contacts { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+
+    .book-contact-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      color: rgba(255,255,255,0.6); font-size: 0.875rem;
+      text-decoration: none; transition: color 0.2s;
+    }
+
+    .book-contact-item:hover { color: var(--teal-lt); }
+
+    .book-contact-icon {
+      width: 2.5rem; height: 2.5rem;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .book-contact-item:hover .book-contact-icon { background: rgba(0,168,181,0.15); border-color: var(--teal); }
+
+    .form-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 0.5rem;
+      padding: 2.5rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { margin-bottom: 1.25rem; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 0.25rem;
+      padding: 0.8rem 1rem;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .form-group select option { background: var(--ocean); color: var(--white); }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--teal); background: rgba(0,168,181,0.06); }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--coral);
+      color: white;
+      border: none;
+      border-radius: 0.25rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .form-submit:hover { background: #c95a37; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(224,107,69,0.35); }
+    .form-submit:active { transform: translateY(0); }
+
+    .form-success { display: none; text-align: center; padding: 2rem; color: var(--teal-lt); }
+    .form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 0.5rem; }
+    .form-success p { color: rgba(255,255,255,0.5); font-size: 0.875rem; }
+
+    /* ─── FOOTER ───────────────────────────────────── */
+    footer { background: #020E18; padding: 3rem 2rem; text-align: center; color: rgba(255,255,255,0.25); font-size: 0.8rem; }
+    footer .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: rgba(255,255,255,0.6); margin-bottom: 0.75rem; display: block; }
+    footer a { color: var(--teal); text-decoration: none; }
+
+    /* ─── FLOATING WHATSAPP ────────────────────────── */
+    .wa-float {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+      width: 56px; height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: wa-pulse 3s ease-in-out infinite;
+    }
+
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(37,211,102,0.55); }
+    .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+    @keyframes wa-pulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.45); }
+      50%       { box-shadow: 0 4px 32px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.1); }
+    }
+
+    /* ─── ANIMATIONS ───────────────────────────────── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── MOBILE ───────────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .lang-toggle { display: flex; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-img-frame { display: none; }
+      .why-grid { grid-template-columns: 1fr; }
+      .book-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-cell:first-child { grid-column: span 2; aspect-ratio: 16/9; }
+      .form-row { grid-template-columns: 1fr; }
+      .stats { flex-wrap: wrap; gap: 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-ctas { flex-direction: column; }
+      .btn-primary, .btn-ghost { text-align: center; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-cell:first-child { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="#hero" class="nav-logo">Santiago · Cozumel</a>
+    <ul class="nav-links">
+      <li><a href="#tours" data-i18n="nav.tours">Tours</a></li>
+      <li><a href="#about" data-i18n="nav.about">About</a></li>
+      <li><a href="#gallery" data-i18n="nav.gallery">Gallery</a></li>
+      <li><a href="#book" class="nav-wa">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L.057 23.882a.5.5 0 0 0 .612.612l6.035-1.465A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.019-1.378l-.36-.214-3.733.906.922-3.625-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+        <span data-i18n="nav.book">Book Now</span>
+      </a></li>
+      <li><button id="lang-toggle" class="lang-toggle" aria-label="Switch language">ES</button></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-overlay"></div>
+    <div class="ripple"></div>
+    <div class="ripple"></div>
+    <div class="ripple"></div>
+    <div class="hero-content" style="position:relative;z-index:3;">
+      <p class="hero-eyebrow" data-i18n="hero.eyebrow">Cozumel, Mexico · Private Tours</p>
+      <h1 class="hero-title" data-i18n-html="hero.title">Your island,<br><em>your way.</em></h1>
+      <p class="hero-sub" data-i18n="hero.sub">Forget the crowded groups. Santiago designs every tour around you — your pace, your interests, your perfect day in Cozumel.</p>
+      <div class="hero-ctas">
+        <a href="#book" class="btn-primary" data-i18n="hero.cta1">Plan My Tour</a>
+        <a href="#tours" class="btn-ghost" data-i18n="hero.cta2">See What's Possible</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span data-i18n="hero.scroll">scroll</span>
+    </div>
+  </section>
+
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,0 C360,60 1080,0 1440,40 L1440,60 L0,60 Z" fill="#F4E8D8"/>
+    </svg>
+  </div>
+
+  <!-- TOURS -->
+  <section id="tours">
+    <div class="container">
+      <div class="tours-header reveal">
+        <span class="section-tag" data-i18n="tours.tag">What we do</span>
+        <h2 class="section-title" data-i18n="tours.title">Choose your adventure</h2>
+        <div class="divider-line"></div>
+        <p class="tours-sub" data-i18n="tours.sub">Every tour is private. Every itinerary is yours. Mix, match, and modify — Santiago makes it happen.</p>
+      </div>
+
+      <div class="tours-grid">
+
+        <div class="tour-card reveal">
+          <div class="tour-card-img snorkel">
+            <span class="icon-bg">🤿</span>
+            <span class="tour-badge" data-i18n="tour1.badge">Most Popular</span>
+          </div>
+          <div class="tour-card-body">
+            <h3 data-i18n="tour1.title">Snorkeling & Diving</h3>
+            <p data-i18n="tour1.desc">Explore Cozumel's legendary coral reefs — Palancar, Columbia, and Chankanaab. Some of the clearest water on Earth, teeming with sea turtles, rays, and reef fish.</p>
+            <div class="tour-tags">
+              <span class="tag" data-i18n="tour1.tag1">Half day</span>
+              <span class="tag" data-i18n="tour1.tag2">Full day</span>
+              <span class="tag" data-i18n="tour1.tag3">All levels</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tour-card reveal">
+          <div class="tour-card-img cenotes">
+            <span class="icon-bg">💧</span>
+          </div>
+          <div class="tour-card-body">
+            <h3 data-i18n="tour2.title">Cenotes</h3>
+            <p data-i18n="tour2.desc">Descend into the mystical underground rivers of the Yucatán. Crystal-clear freshwater caves carved over millions of years — a once-in-a-lifetime swim.</p>
+            <div class="tour-tags">
+              <span class="tag" data-i18n="tour2.tag1">Day trip</span>
+              <span class="tag" data-i18n="tour2.tag2">Mainland</span>
+              <span class="tag" data-i18n="tour2.tag3">Magical</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tour-card reveal">
+          <div class="tour-card-img island">
+            <span class="icon-bg">🏝️</span>
+          </div>
+          <div class="tour-card-body">
+            <h3 data-i18n="tour3.title">Island Tour</h3>
+            <p data-i18n="tour3.desc">Circle the whole island — hidden beaches, Mayan ruins, wild coast, beach clubs, the best local tacos. A complete Cozumel experience in one day.</p>
+            <div class="tour-tags">
+              <span class="tag" data-i18n="tour3.tag1">Full day</span>
+              <span class="tag" data-i18n="tour3.tag2">Families</span>
+              <span class="tag" data-i18n="tour3.tag3">Culture</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tour-card reveal">
+          <div class="tour-card-img fishing">
+            <span class="icon-bg">🎣</span>
+          </div>
+          <div class="tour-card-body">
+            <h3 data-i18n="tour4.title">Sport Fishing</h3>
+            <p data-i18n="tour4.desc">The Caribbean waters off Cozumel are rich with marlin, mahi-mahi, wahoo, and barracuda. Private boat, experienced crew, unforgettable catch.</p>
+            <div class="tour-tags">
+              <span class="tag" data-i18n="tour4.tag1">Half day</span>
+              <span class="tag" data-i18n="tour4.tag2">Full day</span>
+              <span class="tag" data-i18n="tour4.tag3">Charter</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tour-card reveal">
+          <div class="tour-card-img custom">
+            <span class="icon-bg">✨</span>
+            <span class="tour-badge" data-i18n="tour5.badge">Build Your Own</span>
+          </div>
+          <div class="tour-card-body">
+            <h3 data-i18n="tour5.title">Fully Custom</h3>
+            <p data-i18n="tour5.desc">Reef in the morning, cenote at noon, sunset on a beach with fresh ceviche — Santiago builds exactly what you want. No request is too specific.</p>
+            <div class="tour-tags">
+              <span class="tag" data-i18n="tour5.tag1">Your schedule</span>
+              <span class="tag" data-i18n="tour5.tag2">Your pace</span>
+              <span class="tag" data-i18n="tour5.tag3">Anything</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,60 C360,0 1080,60 1440,20 L1440,0 L0,0 Z" fill="#F4E8D8"/>
+    </svg>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img-frame reveal">
+          <div class="about-img-placeholder">
+            <span>📸</span>
+            <span data-i18n="about.photo">Add your photo here</span>
+          </div>
+          <div class="about-accent"></div>
+        </div>
+        <div class="about-content reveal">
+          <span class="section-tag" data-i18n="about.tag">Your guide</span>
+          <h2 class="section-title light" data-i18n="about.title">Meet Santiago</h2>
+          <div class="divider-line"></div>
+          <p class="about-body" data-i18n="about.body1">Born and raised in Cozumel, Santiago has spent his life exploring every reef, cenote, and hidden corner of this island. He doesn't just know the best spots — he knows the stories behind them.</p>
+          <p class="about-body" data-i18n="about.body2">Unlike big tour operators, Santiago keeps every group small and private. You get his full attention, his local knowledge, and a day shaped entirely around what you want to experience.</p>
+          <p class="about-body">
+            <em style="color: rgba(255,255,255,0.4); font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic;" data-i18n="about.quote">"I don't take you to Cozumel. I show you my Cozumel."</em>
+          </p>
+          <div class="stats">
+            <div>
+              <div class="stat-num">10+</div>
+              <div class="stat-label" data-i18n="about.stat1">Years guiding</div>
+            </div>
+            <div>
+              <div class="stat-num">500+</div>
+              <div class="stat-label" data-i18n="about.stat2">Happy guests</div>
+            </div>
+            <div>
+              <div class="stat-num">100%</div>
+              <div class="stat-label" data-i18n="about.stat3">Private tours</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,0 C360,60 1080,0 1440,40 L1440,60 L0,60 Z" fill="#FAFAF8"/>
+    </svg>
+  </div>
+
+  <!-- WHY US -->
+  <section id="why">
+    <div class="container">
+      <div class="why-header reveal">
+        <span class="section-tag" data-i18n="why.tag">The difference</span>
+        <h2 class="section-title" data-i18n="why.title">Why go private</h2>
+        <div class="divider-line"></div>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <div class="why-icon">🎯</div>
+          <h3 data-i18n="why1.title">Your itinerary, only</h3>
+          <p data-i18n="why1.desc">No waiting for strangers. No rushed schedules. Every decision — where to go, when to stop, how long to stay — is yours.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon">🤝</div>
+          <h3 data-i18n="why2.title">Local knowledge</h3>
+          <p data-i18n="why2.desc">Santiago knows which reef is clearest that morning, which beach has no crowds, and where locals actually eat. That's not in any guidebook.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon">🌊</div>
+          <h3 data-i18n="why3.title">Safe & certified</h3>
+          <p data-i18n="why3.desc">Licensed guide, safety-first approach, and intimate knowledge of Cozumel's waters. Your adventure, without the worry.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="container">
+      <div class="gallery-header reveal">
+        <span class="section-tag" data-i18n="gallery.tag">On the water</span>
+        <h2 class="section-title" data-i18n="gallery.title">Life out here</h2>
+        <div class="divider-line"></div>
+      </div>
+      <div class="gallery-grid reveal">
+        <div class="gallery-cell">
+          <div class="gallery-cell-inner">
+            <span>📷</span>
+            <div data-i18n="gallery.cell1">Featured photo</div>
+          </div>
+        </div>
+        <div class="gallery-cell">
+          <div class="gallery-cell-inner"><span>🐠</span><div data-i18n="gallery.cell2">Reef life</div></div>
+        </div>
+        <div class="gallery-cell">
+          <div class="gallery-cell-inner"><span>🌅</span><div data-i18n="gallery.cell3">Sunset</div></div>
+        </div>
+        <div class="gallery-cell">
+          <div class="gallery-cell-inner"><span>💧</span><div data-i18n="gallery.cell4">Cenote</div></div>
+        </div>
+        <div class="gallery-cell">
+          <div class="gallery-cell-inner"><span>🐢</span><div data-i18n="gallery.cell5">Sea turtle</div></div>
+        </div>
+      </div>
+      <p class="gallery-note" data-i18n="gallery.note">📸 Replace placeholders with real tour photos for maximum impact</p>
+    </div>
+  </section>
+
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,60 C360,0 1080,60 1440,20 L1440,0 L0,0 Z" fill="#F4E8D8"/>
+    </svg>
+  </div>
+
+  <!-- BOOKING -->
+  <section id="book">
+    <div class="container">
+      <div class="book-grid">
+        <div class="book-info reveal">
+          <span class="section-tag" data-i18n="book.tag">Get in touch</span>
+          <h2 class="section-title light" data-i18n-html="book.title">Plan your<br>perfect day</h2>
+          <div class="divider-line"></div>
+          <p data-i18n="book.desc">Tell Santiago what you have in mind — he'll respond within a few hours with a personalized plan and quote. No commitment required.</p>
+          <div class="book-contacts">
+            <a href="https://wa.me/521XXXXXXXXXX?text=Hi%20Santiago!%20I'm%20interested%20in%20a%20private%20tour%20in%20Cozumel." class="book-contact-item" target="_blank">
+              <div class="book-contact-icon">💬</div>
+              <span data-i18n="book.wa">WhatsApp (fastest)</span>
+            </a>
+            <a href="mailto:jonathandioli@gmail.com" class="book-contact-item">
+              <div class="book-contact-icon">✉️</div>
+              jonathandioli@gmail.com
+            </a>
+          </div>
+        </div>
+
+        <div class="form-card reveal">
+          <form id="booking-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label data-i18n="form.name.label">Your Name</label>
+                <input type="text" name="name" data-i18n-ph="form.name.ph" placeholder="First & Last" required />
+              </div>
+              <div class="form-group">
+                <label data-i18n="form.email.label">Email</label>
+                <input type="email" name="email" placeholder="you@email.com" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label data-i18n="form.date.label">Tour Date</label>
+                <input type="date" name="date" required />
+              </div>
+              <div class="form-group">
+                <label data-i18n="form.group.label">Group Size</label>
+                <select name="group_size" data-i18n-opts="form.group">
+                  <option value="">Select...</option>
+                  <option>1–2 people</option>
+                  <option>3–4 people</option>
+                  <option>5–6 people</option>
+                  <option>7+ people</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label data-i18n="form.tour.label">Tour Interest</label>
+              <select name="tour_type" data-i18n-opts="form.tour">
+                <option value="">What sounds good?</option>
+                <option>Snorkeling / Diving</option>
+                <option>Cenotes</option>
+                <option>Island Tour</option>
+                <option>Sport Fishing</option>
+                <option>Build My Own Custom Tour</option>
+                <option>Not sure yet — help me decide</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label data-i18n="form.msg.label">Tell Santiago more (optional)</label>
+              <textarea name="message" data-i18n-ph="form.msg.ph" placeholder="Any special requests, interests, questions, or ideas for your perfect day..."></textarea>
+            </div>
+            <button type="submit" class="form-submit" data-i18n="form.submit">Send My Request →</button>
+          </form>
+          <div class="form-success" id="form-success">
+            <h3 data-i18n="form.success.title">Message sent! 🌊</h3>
+            <p data-i18n="form.success.desc">Santiago will be in touch within a few hours. Check your email or WhatsApp.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Cozumel Excursions with Santiago</span>
+    <p>Cozumel, Quintana Roo, Mexico &nbsp;·&nbsp; <a href="mailto:jonathandioli@gmail.com">jonathandioli@gmail.com</a></p>
+    <p style="margin-top:1rem;" data-i18n="footer.rights">© 2025 Santiago Guide Cozumel. All rights reserved.</p>
+  </footer>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://wa.me/521XXXXXXXXXX?text=Hi%20Santiago!%20I'm%20interested%20in%20a%20private%20tour%20in%20Cozumel." class="wa-float" target="_blank" title="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zm-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884zm8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 23.882a.5.5 0 0 0 .61.61l6.035-1.46a11.86 11.86 0 0 0 5.765 1.47h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <script>
+    // ── HERO BACKGROUND IMAGE ──────────────────────────
+    // Uses new Image() so the browser follows the Unsplash redirect,
+    // then applies the cached URL as CSS background-size:cover on #hero.
+    (function() {
+      const HERO_URL = 'https://source.unsplash.com/948Dftugtxo/1920x1080';
+      const hero = document.getElementById('hero');
+      const img = new Image();
+      img.onload = function() {
+        hero.style.backgroundImage = `url('${img.src}')`;
+        hero.style.backgroundSize = 'cover';
+        hero.style.backgroundPosition = 'center';
+        hero.style.backgroundRepeat = 'no-repeat';
+      };
+      img.src = HERO_URL;
+    })();
+
+    // ── TRANSLATIONS ───────────────────────────────────
+    const T = {
+      en: {
+        'nav.tours': 'Tours',
+        'nav.about': 'About',
+        'nav.gallery': 'Gallery',
+        'nav.book': 'Book Now',
+
+        'hero.eyebrow': 'Cozumel, Mexico · Private Tours',
+        'hero.title': 'Your island,<br><em>your way.</em>',
+        'hero.sub': 'Forget the crowded groups. Santiago designs every tour around you — your pace, your interests, your perfect day in Cozumel.',
+        'hero.cta1': 'Plan My Tour',
+        'hero.cta2': "See What's Possible",
+        'hero.scroll': 'scroll',
+
+        'tours.tag': 'What we do',
+        'tours.title': 'Choose your adventure',
+        'tours.sub': 'Every tour is private. Every itinerary is yours. Mix, match, and modify — Santiago makes it happen.',
+
+        'tour1.badge': 'Most Popular',
+        'tour1.title': 'Snorkeling & Diving',
+        'tour1.desc': "Explore Cozumel's legendary coral reefs — Palancar, Columbia, and Chankanaab. Some of the clearest water on Earth, teeming with sea turtles, rays, and reef fish.",
+        'tour1.tag1': 'Half day', 'tour1.tag2': 'Full day', 'tour1.tag3': 'All levels',
+
+        'tour2.title': 'Cenotes',
+        'tour2.desc': 'Descend into the mystical underground rivers of the Yucatán. Crystal-clear freshwater caves carved over millions of years — a once-in-a-lifetime swim.',
+        'tour2.tag1': 'Day trip', 'tour2.tag2': 'Mainland', 'tour2.tag3': 'Magical',
+
+        'tour3.title': 'Island Tour',
+        'tour3.desc': 'Circle the whole island — hidden beaches, Mayan ruins, wild coast, beach clubs, the best local tacos. A complete Cozumel experience in one day.',
+        'tour3.tag1': 'Full day', 'tour3.tag2': 'Families', 'tour3.tag3': 'Culture',
+
+        'tour4.title': 'Sport Fishing',
+        'tour4.desc': 'The Caribbean waters off Cozumel are rich with marlin, mahi-mahi, wahoo, and barracuda. Private boat, experienced crew, unforgettable catch.',
+        'tour4.tag1': 'Half day', 'tour4.tag2': 'Full day', 'tour4.tag3': 'Charter',
+
+        'tour5.badge': 'Build Your Own',
+        'tour5.title': 'Fully Custom',
+        'tour5.desc': 'Reef in the morning, cenote at noon, sunset on a beach with fresh ceviche — Santiago builds exactly what you want. No request is too specific.',
+        'tour5.tag1': 'Your schedule', 'tour5.tag2': 'Your pace', 'tour5.tag3': 'Anything',
+
+        'about.tag': 'Your guide',
+        'about.title': 'Meet Santiago',
+        'about.photo': 'Add your photo here',
+        'about.body1': "Born and raised in Cozumel, Santiago has spent his life exploring every reef, cenote, and hidden corner of this island. He doesn't just know the best spots — he knows the stories behind them.",
+        'about.body2': 'Unlike big tour operators, Santiago keeps every group small and private. You get his full attention, his local knowledge, and a day shaped entirely around what you want to experience.',
+        'about.quote': '"I don\'t take you to Cozumel. I show you my Cozumel."',
+        'about.stat1': 'Years guiding', 'about.stat2': 'Happy guests', 'about.stat3': 'Private tours',
+
+        'why.tag': 'The difference',
+        'why.title': 'Why go private',
+        'why1.title': 'Your itinerary, only',
+        'why1.desc': 'No waiting for strangers. No rushed schedules. Every decision — where to go, when to stop, how long to stay — is yours.',
+        'why2.title': 'Local knowledge',
+        'why2.desc': "Santiago knows which reef is clearest that morning, which beach has no crowds, and where locals actually eat. That's not in any guidebook.",
+        'why3.title': 'Safe & certified',
+        'why3.desc': "Licensed guide, safety-first approach, and intimate knowledge of Cozumel's waters. Your adventure, without the worry.",
+
+        'gallery.tag': 'On the water',
+        'gallery.title': 'Life out here',
+        'gallery.cell1': 'Featured photo', 'gallery.cell2': 'Reef life',
+        'gallery.cell3': 'Sunset', 'gallery.cell4': 'Cenote', 'gallery.cell5': 'Sea turtle',
+        'gallery.note': '📸 Replace placeholders with real tour photos for maximum impact',
+
+        'book.tag': 'Get in touch',
+        'book.title': 'Plan your<br>perfect day',
+        'book.desc': "Tell Santiago what you have in mind — he'll respond within a few hours with a personalized plan and quote. No commitment required.",
+        'book.wa': 'WhatsApp (fastest)',
+
+        'form.name.label': 'Your Name', 'form.name.ph': 'First & Last',
+        'form.email.label': 'Email',
+        'form.date.label': 'Tour Date',
+        'form.group.label': 'Group Size',
+        'form.group.0': 'Select...', 'form.group.1': '1–2 people',
+        'form.group.2': '3–4 people', 'form.group.3': '5–6 people', 'form.group.4': '7+ people',
+        'form.tour.label': 'Tour Interest',
+        'form.tour.0': 'What sounds good?', 'form.tour.1': 'Snorkeling / Diving',
+        'form.tour.2': 'Cenotes', 'form.tour.3': 'Island Tour', 'form.tour.4': 'Sport Fishing',
+        'form.tour.5': 'Build My Own Custom Tour', 'form.tour.6': 'Not sure yet — help me decide',
+        'form.msg.label': 'Tell Santiago more (optional)',
+        'form.msg.ph': 'Any special requests, interests, questions, or ideas for your perfect day...',
+        'form.submit': 'Send My Request →',
+        'form.sending': 'Sending...',
+        'form.success.title': 'Message sent! 🌊',
+        'form.success.desc': 'Santiago will be in touch within a few hours. Check your email or WhatsApp.',
+
+        'footer.rights': '© 2025 Santiago Guide Cozumel. All rights reserved.',
+      },
+
+      es: {
+        'nav.tours': 'Tours',
+        'nav.about': 'Sobre Mí',
+        'nav.gallery': 'Galería',
+        'nav.book': 'Reservar',
+
+        'hero.eyebrow': 'Cozumel, México · Tours Privados',
+        'hero.title': 'Tu isla,<br><em>a tu manera.</em>',
+        'hero.sub': 'Olvídate de los grupos abarrotados. Santiago diseña cada tour pensando en ti — tu ritmo, tus intereses, tu día perfecto en Cozumel.',
+        'hero.cta1': 'Planea Mi Tour',
+        'hero.cta2': 'Ver Qué Es Posible',
+        'hero.scroll': 'desliza',
+
+        'tours.tag': 'Lo que hacemos',
+        'tours.title': 'Elige tu aventura',
+        'tours.sub': 'Cada tour es privado. Cada itinerario es tuyo. Mezcla, combina y modifica — Santiago lo hace posible.',
+
+        'tour1.badge': 'El Más Popular',
+        'tour1.title': 'Snorkel y Buceo',
+        'tour1.desc': 'Explora los legendarios arrecifes de coral de Cozumel — Palancar, Columbia y Chankanaab. Aguas entre las más cristalinas del mundo, llenas de tortugas marinas, rayas y peces de arrecife.',
+        'tour1.tag1': 'Medio día', 'tour1.tag2': 'Día completo', 'tour1.tag3': 'Todos los niveles',
+
+        'tour2.title': 'Cenotes',
+        'tour2.desc': 'Sumérgete en los místicos ríos subterráneos del Yucatán. Cuevas de agua dulce cristalina formadas durante millones de años — un nado único en la vida.',
+        'tour2.tag1': 'Excursión de día', 'tour2.tag2': 'Tierra firme', 'tour2.tag3': 'Mágico',
+
+        'tour3.title': 'Tour de la Isla',
+        'tour3.desc': 'Recorre toda la isla — playas escondidas, ruinas mayas, costa salvaje, beach clubs y los mejores tacos locales. Una experiencia completa de Cozumel en un solo día.',
+        'tour3.tag1': 'Día completo', 'tour3.tag2': 'Familias', 'tour3.tag3': 'Cultura',
+
+        'tour4.title': 'Pesca Deportiva',
+        'tour4.desc': 'Las aguas del Caribe cerca de Cozumel están llenas de marlín, mahi-mahi, wahoo y barracuda. Lancha privada, tripulación con experiencia, captura inolvidable.',
+        'tour4.tag1': 'Medio día', 'tour4.tag2': 'Día completo', 'tour4.tag3': 'Charter',
+
+        'tour5.badge': 'Créalo Tú',
+        'tour5.title': 'Totalmente Personalizado',
+        'tour5.desc': 'Arrecife en la mañana, cenote al mediodía, atardecer en la playa con ceviche fresco — Santiago construye exactamente lo que deseas. Ninguna petición es demasiado específica.',
+        'tour5.tag1': 'Tu horario', 'tour5.tag2': 'Tu ritmo', 'tour5.tag3': 'Todo',
+
+        'about.tag': 'Tu guía',
+        'about.title': 'Conoce a Santiago',
+        'about.photo': 'Agrega tu foto aquí',
+        'about.body1': 'Nacido y criado en Cozumel, Santiago ha dedicado su vida a explorar cada arrecife, cenote y rincón escondido de esta isla. No solo conoce los mejores lugares — conoce las historias detrás de ellos.',
+        'about.body2': 'A diferencia de las grandes operadoras turísticas, Santiago mantiene cada grupo pequeño y privado. Recibes toda su atención, su conocimiento local y un día diseñado completamente para lo que tú quieres vivir.',
+        'about.quote': '"No te llevo a Cozumel. Te muestro mi Cozumel."',
+        'about.stat1': 'Años de guía', 'about.stat2': 'Visitantes felices', 'about.stat3': 'Tours privados',
+
+        'why.tag': 'La diferencia',
+        'why.title': 'Por qué elegir privado',
+        'why1.title': 'Solo tu itinerario',
+        'why1.desc': 'Sin esperar a desconocidos. Sin horarios apresurados. Cada decisión — a dónde ir, cuándo parar, cuánto tiempo quedarse — es tuya.',
+        'why2.title': 'Conocimiento local',
+        'why2.desc': 'Santiago sabe qué arrecife está más claro esa mañana, qué playa no tiene multitudes y dónde comen los locales de verdad. Eso no está en ninguna guía.',
+        'why3.title': 'Seguro y certificado',
+        'why3.desc': 'Guía certificado, enfoque de seguridad ante todo y conocimiento íntimo de las aguas de Cozumel. Tu aventura, sin preocupaciones.',
+
+        'gallery.tag': 'En el agua',
+        'gallery.title': 'La vida aquí',
+        'gallery.cell1': 'Foto destacada', 'gallery.cell2': 'Vida en el arrecife',
+        'gallery.cell3': 'Atardecer', 'gallery.cell4': 'Cenote', 'gallery.cell5': 'Tortuga marina',
+        'gallery.note': '📸 Reemplaza los espacios con fotos reales de los tours para mayor impacto',
+
+        'book.tag': 'Contáctanos',
+        'book.title': 'Planea tu<br>día perfecto',
+        'book.desc': 'Cuéntale a Santiago qué tienes en mente — responderá en pocas horas con un plan personalizado y cotización. Sin compromiso.',
+        'book.wa': 'WhatsApp (más rápido)',
+
+        'form.name.label': 'Tu Nombre', 'form.name.ph': 'Nombre y Apellido',
+        'form.email.label': 'Correo',
+        'form.date.label': 'Fecha del Tour',
+        'form.group.label': 'Tamaño del Grupo',
+        'form.group.0': 'Selecciona...', 'form.group.1': '1–2 personas',
+        'form.group.2': '3–4 personas', 'form.group.3': '5–6 personas', 'form.group.4': '7+ personas',
+        'form.tour.label': 'Tour de Interés',
+        'form.tour.0': '¿Qué te interesa?', 'form.tour.1': 'Snorkel / Buceo',
+        'form.tour.2': 'Cenotes', 'form.tour.3': 'Tour de la Isla', 'form.tour.4': 'Pesca Deportiva',
+        'form.tour.5': 'Crear Mi Tour Personalizado', 'form.tour.6': 'No estoy seguro — ayúdame a decidir',
+        'form.msg.label': 'Cuéntale más a Santiago (opcional)',
+        'form.msg.ph': 'Cualquier solicitud especial, intereses, preguntas o ideas para tu día perfecto...',
+        'form.submit': 'Enviar Mi Solicitud →',
+        'form.sending': 'Enviando...',
+        'form.success.title': '¡Mensaje enviado! 🌊',
+        'form.success.desc': 'Santiago estará en contacto en pocas horas. Revisa tu correo o WhatsApp.',
+
+        'footer.rights': '© 2025 Santiago Guide Cozumel. Todos los derechos reservados.',
+      }
+    };
+
+    // ── LANG ENGINE ────────────────────────────────────
+    let lang = localStorage.getItem('santiago-lang') || 'en';
+
+    function applyLang(l) {
+      const t = T[l];
+      // textContent
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const v = t[el.dataset.i18n];
+        if (v !== undefined) el.textContent = v;
+      });
+      // innerHTML (for elements with embedded tags)
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const v = t[el.dataset.i18nHtml];
+        if (v !== undefined) el.innerHTML = v;
+      });
+      // placeholder attributes
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const v = t[el.dataset.i18nPh];
+        if (v !== undefined) el.placeholder = v;
+      });
+      // select options
+      document.querySelectorAll('[data-i18n-opts]').forEach(select => {
+        const prefix = select.dataset.i18nOpts;
+        select.querySelectorAll('option').forEach((opt, i) => {
+          const v = t[`${prefix}.${i}`];
+          if (v !== undefined) opt.textContent = v;
+        });
+      });
+      // toggle button label
+      document.getElementById('lang-toggle').textContent = l === 'en' ? 'ES' : 'EN';
+      document.documentElement.lang = l;
+      localStorage.setItem('santiago-lang', l);
+      lang = l;
+    }
+
+    document.getElementById('lang-toggle').addEventListener('click', () => {
+      applyLang(lang === 'en' ? 'es' : 'en');
+    });
+
+    // Apply on load (respects saved preference)
+    applyLang(lang);
+
+    // ── NAV SCROLL ─────────────────────────────────────
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ── SCROLL REVEAL ──────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.style.transitionDelay = `${i * 0.05}s`;
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── FORM SUBMIT ────────────────────────────────────
+    // Sign up at formspree.io and replace with your endpoint, e.g. https://formspree.io/f/xabcdefg
+    const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID';
+
+    const form = document.getElementById('booking-form');
+    const successEl = document.getElementById('form-success');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('.form-submit');
+      btn.textContent = T[lang]['form.sending'];
+      btn.disabled = true;
+
+      const data = new FormData(form);
+
+      try {
+        const res = await fetch(FORMSPREE_URL, {
+          method: 'POST', body: data,
+          headers: { Accept: 'application/json' }
+        });
+        if (res.ok) {
+          form.style.display = 'none';
+          successEl.style.display = 'block';
+        } else {
+          throw new Error();
+        }
+      } catch {
+        // Fallback: mailto
+        const name  = data.get('name') || '';
+        const date  = data.get('date') || '';
+        const group = data.get('group_size') || '';
+        const tour  = data.get('tour_type') || '';
+        const msg   = data.get('message') || '';
+        const body  = encodeURIComponent(`Name: ${name}\nDate: ${date}\nGroup: ${group}\nTour: ${tour}\n\n${msg}`);
+        window.location.href = `mailto:jonathandioli@gmail.com?subject=Tour Inquiry from ${encodeURIComponent(name)}&body=${body}`;
+        btn.textContent = T[lang]['form.submit'];
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
