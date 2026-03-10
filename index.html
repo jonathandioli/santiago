@@ -138,7 +138,7 @@
       display: flex;
       align-items: center;
       overflow: hidden;
-      background: #041C2C;
+      background: #041C2C url('assets/fernando-jorge-948Dftugtxo-unsplash.jpg') center center / cover no-repeat;
     }
 
     .hero-overlay {
@@ -147,9 +147,9 @@
       width: 100%; height: 100%;
       background: linear-gradient(
         to bottom,
-        rgba(4,28,44,0.55) 0%,
-        rgba(4,28,44,0.35) 50%,
-        rgba(4,28,44,0.60) 100%
+        rgba(4,28,44,0.82) 0%,
+        rgba(4,28,44,0.72) 50%,
+        rgba(4,28,44,0.88) 100%
       );
       z-index: 1;
     }
@@ -157,7 +157,7 @@
     .ripple {
       position: absolute;
       border-radius: 50%;
-      border: 1px solid rgba(0,201,216,0.25);
+      border: 1px solid rgba(0,201,216,0.35);
       animation: ripple-expand 8s ease-out infinite;
       z-index: 2;
     }
@@ -418,23 +418,14 @@
 
     .about-img-frame { position: relative; }
 
-    .about-img-placeholder {
+    .about-photo {
+      width: 100%;
       aspect-ratio: 3/4;
-      background: linear-gradient(160deg, #062438, #0A3A4A);
+      object-fit: cover;
+      object-position: center top;
       border-radius: 0.4rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      color: rgba(255,255,255,0.25);
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: 1px solid rgba(0,168,181,0.15);
+      display: block;
     }
-
-    .about-img-placeholder span { font-size: 3rem; }
 
     .about-accent {
       position: absolute;
@@ -711,7 +702,8 @@
     </div>
   </section>
 
-  <div class="wave-divider">
+  <!-- WAVE: hero → tours -->
+  <div class="wave-divider" style="background: var(--ocean);">
     <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
       <path d="M0,0 C360,60 1080,0 1440,40 L1440,60 L0,60 Z" fill="#F4E8D8"/>
     </svg>
@@ -810,7 +802,7 @@
     </div>
   </section>
 
-  <div class="wave-divider">
+  <div class="wave-divider" style="background: var(--ocean);">
     <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
       <path d="M0,60 C360,0 1080,60 1440,20 L1440,0 L0,0 Z" fill="#F4E8D8"/>
     </svg>
@@ -821,10 +813,7 @@
     <div class="container">
       <div class="about-grid">
         <div class="about-img-frame reveal">
-          <div class="about-img-placeholder">
-            <span>📸</span>
-            <span data-i18n="about.photo">Add your photo here</span>
-          </div>
+          <img src="assets/santiago.jpg" alt="Santiago, your Cozumel guide" class="about-photo" />
           <div class="about-accent"></div>
         </div>
         <div class="about-content reveal">
@@ -855,7 +844,7 @@
     </div>
   </section>
 
-  <div class="wave-divider">
+  <div class="wave-divider" style="background: var(--ocean);">
     <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
       <path d="M0,0 C360,60 1080,0 1440,40 L1440,60 L0,60 Z" fill="#FAFAF8"/>
     </svg>
@@ -921,7 +910,7 @@
     </div>
   </section>
 
-  <div class="wave-divider">
+  <div class="wave-divider" style="background: var(--ocean);">
     <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
       <path d="M0,60 C360,0 1080,60 1440,20 L1440,0 L0,0 Z" fill="#F4E8D8"/>
     </svg>
@@ -1018,21 +1007,6 @@
   </a>
 
   <script>
-    // ── HERO BACKGROUND IMAGE ──────────────────────────
-    // Uses new Image() so the browser follows the Unsplash redirect,
-    // then applies the cached URL as CSS background-size:cover on #hero.
-    (function() {
-      const HERO_URL = 'https://source.unsplash.com/948Dftugtxo/1920x1080';
-      const hero = document.getElementById('hero');
-      const img = new Image();
-      img.onload = function() {
-        hero.style.backgroundImage = `url('${img.src}')`;
-        hero.style.backgroundSize = 'cover';
-        hero.style.backgroundPosition = 'center';
-        hero.style.backgroundRepeat = 'no-repeat';
-      };
-      img.src = HERO_URL;
-    })();
 
     // ── TRANSLATIONS ───────────────────────────────────
     const T = {
