@@ -93,9 +93,9 @@
     .nav-links a:hover { color: var(--teal-lt); }
 
     .nav-wa {
-      background: #25D366;
+      background: var(--teal);
       color: white !important;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 1.6rem;
       border-radius: 2rem;
       font-size: 0.75rem !important;
       display: flex;
@@ -107,7 +107,7 @@
     .nav-wa:hover {
       color: white !important;
       transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+      box-shadow: 0 4px 16px rgba(0,168,181,0.4);
     }
 
     /* ─── LANGUAGE TOGGLE ──────────────────────────── */
@@ -193,7 +193,7 @@
 
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.2rem, 9vw, 7.5rem);
+      font-size: clamp(2.4rem, 6vw, 5rem);
       font-weight: 300;
       line-height: 0.95;
       color: var(--white);
@@ -272,14 +272,14 @@
 
     .hero-scroll {
       position: absolute;
-      bottom: 2.5rem;
+      bottom: 4.5rem;
       left: 50%;
       transform: translateX(-50%);
       z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.5rem;
+      gap: 1rem;
       color: rgba(255,255,255,0.4);
       font-size: 0.65rem;
       letter-spacing: 0.15em;
@@ -788,7 +788,6 @@
       <li><a href="#about" data-i18n="nav.about">About</a></li>
       <li><a href="#gallery" data-i18n="nav.gallery">Gallery</a></li>
       <li><a href="#book" class="nav-wa">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L.057 23.882a.5.5 0 0 0 .612.612l6.035-1.465A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.019-1.378l-.36-.214-3.733.906.922-3.625-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
         <span data-i18n="nav.book">Book Now</span>
       </a></li>
       <li><button id="lang-toggle" class="lang-toggle" aria-label="Switch language">ES</button></li>
