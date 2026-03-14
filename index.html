@@ -1548,8 +1548,8 @@
     });
 
     // ── FORM SUBMIT ────────────────────────────────────
-    // Sign up at formspree.io and replace with your endpoint, e.g. https://formspree.io/f/xabcdefg
-    const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID';
+    // FormSubmit.co — no account needed. First submission triggers a one-time confirmation email to activate.
+    const FORMSUBMIT_URL = 'https://formsubmit.co/ajax/santiagoygloria30@gmail.com';
 
     const form = document.getElementById('booking-form');
     const successEl = document.getElementById('form-success');
@@ -1563,7 +1563,7 @@
       const data = new FormData(form);
 
       try {
-        const res = await fetch(FORMSPREE_URL, {
+        const res = await fetch(FORMSUBMIT_URL, {
           method: 'POST', body: data,
           headers: { Accept: 'application/json' }
         });
