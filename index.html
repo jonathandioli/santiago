@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Private Tours in Cozumel, Mexico | Cozumel Excursions with Santiago</title>
   <meta name="description" content="Book a private, fully customized tour in Cozumel, Mexico with local guide Santiago. Snorkeling, diving, cenotes, jeep island tours, sport fishing, and more — your itinerary, your pace." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%2300A8B5'/><text x='50' y='68' font-family='Georgia,serif' font-size='58' font-weight='bold' text-anchor='middle' fill='white'>S</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -300,7 +301,7 @@
     }
 
     /* ─── WAVE DIVIDERS ────────────────────────────── */
-    .wave-divider { display: block; width: 100%; overflow: hidden; line-height: 0; }
+    .wave-divider { display: block; width: 100%; overflow: hidden; line-height: 0; margin-top: -1px; margin-bottom: -1px; }
     .wave-divider svg { display: block; width: 100%; }
 
     /* ─── SECTION SHARED ───────────────────────────── */
@@ -479,6 +480,46 @@
 
     .why-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--ocean); margin-bottom: 0.75rem; }
     .why-card p { color: var(--muted); font-size: 0.875rem; line-height: 1.7; }
+
+    /* ─── TESTIMONIALS ─────────────────────────────── */
+    #testimonials { background: var(--ocean); padding: 6rem 0; }
+    .testimonials-header { text-align: center; margin-bottom: 3rem; }
+    .testimonials-header .section-tag { color: var(--teal-lt); }
+    .testimonials-header .divider-line { margin: 1.5rem auto; }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .testimonial-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 0.4rem;
+      padding: 2rem;
+      transition: border-color 0.3s;
+    }
+
+    .testimonial-card:hover { border-color: rgba(0,168,181,0.3); }
+
+    .testimonial-stars { color: #F4B942; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 1rem; }
+
+    .testimonial-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-meta { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+    .testimonial-author { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+    .testimonial-source { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); opacity: 0.7; }
+
+    @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
 
     /* ─── GALLERY ──────────────────────────────────── */
     #gallery { background: var(--sand); padding: 6rem 0; }
@@ -680,6 +721,10 @@
     footer { background: #020E18; padding: 3rem 2rem; text-align: center; color: rgba(255,255,255,0.25); font-size: 0.8rem; }
     footer .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: rgba(255,255,255,0.6); margin-bottom: 0.75rem; display: block; }
     footer a { color: var(--teal); text-decoration: none; }
+    .footer-social { display: flex; justify-content: center; gap: 1.25rem; margin: 1.25rem 0 0.5rem; }
+    .footer-social a { color: rgba(255,255,255,0.45); display: flex; align-items: center; transition: color 0.2s; }
+    .footer-social a:hover { color: var(--teal-lt); }
+    .footer-social svg { width: 22px; height: 22px; fill: currentColor; }
 
     /* ─── FLOATING WHATSAPP ────────────────────────── */
     .wa-float {
@@ -771,8 +816,8 @@
     </div>
   </section>
 
-  <!-- WAVE: hero → tours -->
-  <div class="wave-divider" style="background: var(--ocean);">
+  <!-- WAVE: hero → tours (overlaps hero so tan wave rises into photo) -->
+  <div class="wave-divider" style="background: transparent; margin-top: -58px; position: relative; z-index: 2;">
     <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
       <path d="M0,0 C360,60 1080,0 1440,40 L1440,60 L0,60 Z" fill="#F4E8D8"/>
     </svg>
@@ -811,7 +856,7 @@
             <img src="assets/snorkel.jpg" alt="Snorkeling and diving in Cozumel">
           </div>
           <div class="tour-card-body">
-            <h3 data-i18n="tour2.title">Snorkeling & Diving</h3>
+            <h3 data-i18n="tour2.title">Snorkeling Tours</h3>
             <p data-i18n="tour2.desc">Explore Cozumel's legendary coral reefs — Palancar, Columbia, and Chankanaab. Some of the clearest water on Earth, teeming with life at every depth.</p>
             <div class="tour-tags">
               <span class="tag" data-i18n="tour2.tag1">Half day</span>
@@ -961,6 +1006,86 @@
     </div>
   </section>
 
+  <div class="wave-divider" style="background: var(--white);">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,40 C360,0 1080,60 1440,0 L1440,60 L0,60 Z" fill="#041C2C"/>
+    </svg>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="testimonials-header reveal">
+        <span class="section-tag" data-i18n="reviews.tag">Guest Reviews</span>
+        <h2 class="section-title light" data-i18n="reviews.title">What guests say</h2>
+        <div class="divider-line"></div>
+      </div>
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">"Santiago and his team were fantastic. They took our family of nine — ages 15 to 81 — for a day on the water and amazing snorkeling. He even snorkeled with us to find turtles and sharks! Would absolutely recommend for families with teens."</p>
+          <div class="testimonial-meta">
+            <span class="testimonial-author">Family of 9</span>
+            <span class="testimonial-source">BoatBooker</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">"Our family booked a 6-hour trip — reef, turtles, stingrays, and fishing. We caught a barracuda! Such a special memory for our family. I would recommend Santiago to anyone who wants an unforgettable private boat tour around Cozumel."</p>
+          <div class="testimonial-meta">
+            <span class="testimonial-author">Family Charter</span>
+            <span class="testimonial-source">BoatBooker</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">"Santiago was fantastic with the kids — engaging, patient, and full of interesting stories about the island. Our 9-year-old gave him 5 stars. One 7-year-old gave him 1 million stars. The other gave him infinity stars. Hard to beat that kind of feedback."</p>
+          <div class="testimonial-meta">
+            <span class="testimonial-author">Family of 8</span>
+            <span class="testimonial-source">Facebook</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">"We had a group of 20 and Santiago arranged everything — transport, a reserved table at a street bar to watch the Carnaval parade. Punctual, professional, and super fun. Look forward to seeing him again the next time we return to the island."</p>
+          <div class="testimonial-meta">
+            <span class="testimonial-author">Group of 20</span>
+            <span class="testimonial-source">Facebook</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">"Thank you Santiago for one of our best excursions ever! You made us all feel like family. Everyone agrees the tortilla lady was the hit of the day! We appreciate you custom tailoring the tour to keep nine ladies happy. We 100% recommend you!"</p>
+          <div class="testimonial-meta">
+            <span class="testimonial-author">Group of 9</span>
+            <span class="testimonial-source">Facebook</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">"Santiago is amazing!!! Wonderful to work with and very open communication all the way through. He will take you anywhere you want to go and knows all the best spots. Amazing, trustworthy tour guide. Highly recommend!! We'll be back!"</p>
+          <div class="testimonial-meta">
+            <span class="testimonial-author">Verified Guest</span>
+            <span class="testimonial-source">Facebook</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider" style="background: var(--ocean);">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,0 C360,60 1080,0 1440,40 L1440,60 L0,60 Z" fill="#F4E8D8"/>
+    </svg>
+  </div>
+
   <!-- GALLERY -->
   <section id="gallery">
     <div class="container">
@@ -1073,7 +1198,7 @@
               <select name="tour_type" data-i18n-opts="form.tour">
                 <option value="">What sounds good?</option>
                 <option>Jeep Island Tour</option>
-                <option>Snorkeling / Diving</option>
+                <option>Snorkeling Tours</option>
                 <option>Dune Buggy Cenote Adventure</option>
                 <option>Sport Fishing</option>
                 <option>Sea Turtles &amp; Rays</option>
@@ -1100,7 +1225,15 @@
   <footer>
     <span class="footer-logo">Cozumel Excursions with Santiago</span>
     <p>Cozumel, Quintana Roo, Mexico &nbsp;·&nbsp; <a href="mailto:santiagoygloria30@gmail.com">santiagoygloria30@gmail.com</a></p>
-    <p style="margin-top:1rem;" data-i18n="footer.rights">© 2025 Santiago Guide Cozumel. All rights reserved.</p>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/santiagoguidecozumel/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/santiago.guidecozumel" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+    </div>
+    <p style="margin-top:0.75rem;" data-i18n="footer.rights">© 2025 Santiago Guide Cozumel. All rights reserved.</p>
   </footer>
 
   <!-- LIGHTBOX -->
@@ -1145,8 +1278,8 @@
         'tour1.desc': 'Explore the whole island in an open-air jeep — hidden beaches, Mayan ruins, wild coastline, beach clubs, and the best local tacos. The classic Cozumel day.',
         'tour1.tag1': 'Full day', 'tour1.tag2': 'Families', 'tour1.tag3': 'All ages',
 
-        'tour2.title': 'Snorkeling & Diving',
-        'tour2.desc': "Explore Cozumel's legendary coral reefs — Palancar, Columbia, and Chankanaab. Some of the clearest water on Earth, teeming with life at every depth.",
+        'tour2.title': 'Snorkeling Tours',
+        'tour2.desc': "Explore Cozumel's legendary coral reefs — Palancar, Colombia, and El Cielo, where starfish blanket the seafloor. Some of the clearest water on Earth, teeming with life at every depth.",
         'tour2.tag1': 'Half day', 'tour2.tag2': 'Full day', 'tour2.tag3': 'All levels',
 
         'tour3.title': 'Dune Buggy Cenote Adventure',
@@ -1184,6 +1317,9 @@
         'why3.title': 'Safe & certified',
         'why3.desc': "Licensed guide, safety-first approach, and intimate knowledge of Cozumel's waters. Your adventure, without the worry.",
 
+        'reviews.tag': 'Guest Reviews',
+        'reviews.title': 'What guests say',
+
         'gallery.tag': 'Cozumel, Mexico',
         'gallery.title': 'Life on the water',
         'gallery.cell1': 'Featured photo', 'gallery.cell2': 'Reef life',
@@ -1203,7 +1339,7 @@
         'form.group.2': '3–4 people', 'form.group.3': '5–6 people', 'form.group.4': '7+ people',
         'form.tour.label': 'Tour Interest',
         'form.tour.0': 'What sounds good?', 'form.tour.1': 'Jeep Island Tour',
-        'form.tour.2': 'Snorkeling / Diving', 'form.tour.3': 'Dune Buggy Cenote Adventure', 'form.tour.4': 'Sport Fishing',
+        'form.tour.2': 'Snorkeling Tours', 'form.tour.3': 'Dune Buggy Cenote Adventure', 'form.tour.4': 'Sport Fishing',
         'form.tour.5': 'Sea Turtles & Rays', 'form.tour.6': 'Build Your Own Tour', 'form.tour.7': 'Not sure yet — help me decide',
         'form.msg.label': 'Tell Santiago more (optional)',
         'form.msg.ph': 'Any special requests, interests, questions, or ideas for your perfect day...',
@@ -1237,8 +1373,8 @@
         'tour1.desc': 'Recorre toda la isla en un jeep descubierto — playas escondidas, ruinas mayas, costa salvaje, beach clubs y los mejores tacos locales. El día clásico de Cozumel.',
         'tour1.tag1': 'Día completo', 'tour1.tag2': 'Familias', 'tour1.tag3': 'Todas las edades',
 
-        'tour2.title': 'Snorkel y Buceo',
-        'tour2.desc': 'Explora los legendarios arrecifes de coral de Cozumel — Palancar, Columbia y Chankanaab. Aguas entre las más cristalinas del mundo, llenas de vida a cada profundidad.',
+        'tour2.title': 'Tours de Snorkel',
+        'tour2.desc': 'Explora los legendarios arrecifes de coral de Cozumel — Palancar, Colombia y El Cielo, donde las estrellas de mar cubren el fondo. Aguas entre las más cristalinas del mundo, llenas de vida a cada profundidad.',
         'tour2.tag1': 'Medio día', 'tour2.tag2': 'Día completo', 'tour2.tag3': 'Todos los niveles',
 
         'tour3.title': 'Aventura en Buggy y Cenote',
@@ -1276,6 +1412,9 @@
         'why3.title': 'Seguro y certificado',
         'why3.desc': 'Guía certificado, enfoque de seguridad ante todo y conocimiento íntimo de las aguas de Cozumel. Tu aventura, sin preocupaciones.',
 
+        'reviews.tag': 'Reseñas',
+        'reviews.title': 'Lo que dicen los visitantes',
+
         'gallery.tag': 'En el agua',
         'gallery.title': 'La vida aquí',
         'gallery.cell1': 'Foto destacada', 'gallery.cell2': 'Vida en el arrecife',
@@ -1295,7 +1434,7 @@
         'form.group.2': '3–4 personas', 'form.group.3': '5–6 personas', 'form.group.4': '7+ personas',
         'form.tour.label': 'Tour de Interés',
         'form.tour.0': '¿Qué te interesa?', 'form.tour.1': 'Tour en Jeep por la Isla',
-        'form.tour.2': 'Snorkel / Buceo', 'form.tour.3': 'Aventura en Buggy y Cenote', 'form.tour.4': 'Pesca Deportiva',
+        'form.tour.2': 'Tours de Snorkel', 'form.tour.3': 'Aventura en Buggy y Cenote', 'form.tour.4': 'Pesca Deportiva',
         'form.tour.5': 'Tortugas Marinas y Rayas', 'form.tour.6': 'Diseña Tu Propio Tour', 'form.tour.7': 'No estoy seguro — ayúdame a decidir',
         'form.msg.label': 'Cuéntale más a Santiago (opcional)',
         'form.msg.ph': 'Cualquier solicitud especial, intereses, preguntas o ideas para tu día perfecto...',
